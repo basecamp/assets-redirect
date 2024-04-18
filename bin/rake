@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "assets/redirect"
+require "rake"
+
+Rake.application.run

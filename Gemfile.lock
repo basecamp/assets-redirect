@@ -1,0 +1,43 @@
+PATH
+  remote: .
+  specs:
+    assets-redirect (0.1.0)
+      activesupport (>= 4.2.0)
+      rack
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (4.2.11.36)
+      i18n (>= 0.7, < 2)
+      minitest (~> 5.1)
+      thread_safe (~> 0.3, >= 0.3.4)
+      tzinfo (~> 1.2, >= 1.2.10)
+    concurrent-ruby (1.2.3)
+    i18n (1.14.4)
+      concurrent-ruby (~> 1.0)
+    minitest (5.22.3)
+    mocha (2.1.0)
+      ruby2_keywords (>= 0.0.5)
+    rack (1.6.13.16)
+    rack-test (0.6.3)
+      rack (>= 1.0)
+    rake (13.2.1)
+    ruby2_keywords (0.0.5)
+    thread_safe (0.3.6)
+    tzinfo (1.2.11)
+      thread_safe (~> 0.1)
+
+PLATFORMS
+  arm64-darwin-22
+  ruby
+
+DEPENDENCIES
+  assets-redirect!
+  minitest
+  mocha
+  rack-test
+  rake
+
+BUNDLED WITH
+   2.4.22

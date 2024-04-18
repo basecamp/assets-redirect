@@ -1,0 +1,96 @@
+require "test_helper"
+
+class Assets::Redirect::SprocketsTest < Minitest::Test
+  include Rack::Test::Methods
+
+  def default_app
+    lambda { |env|
+      headers = {'Content-Type' => "text/html"}
+      [200, headers, ["OK"]]
+    }
+  end
+
+  def app
+    @app ||= build_app
+  end
+  attr_writer :app
+
+  def build_app(options = {})
+    @environment = {
+      # TODO go from here, create a sample image file and use it
+      'application.js' => stub(digest_path: 'image-391dafc3c8e0f58faf6677e72efb27c1.png'),
+      'another-application.js' => stub(digest_path: 'another-image-391dafc3c8e0f58faf6677e72efb27c1.png')
+    }
+
+    Assets::Redirect::Sprockets.new(default_app, @environment, **{ public_path: "fixtures/assets" }.merge(options))
+  end
+
+  def test_redirect
+    # asset not found
+    # logical path given
+    get "http://example.org/assets/application.js"
+    assert_equal "http://example.org/assets/application-1a2b3c4d5e.js",
+      last_response.headers['Location']
+   # TODO also check response code and redirect message and all other fields
+  end
+
+  def test_no_redirect
+    # Not an asset
+    # Asset found
+    # Asset unmatched (not in manifest)
+    # Latest version redirect deleted
+  end
+
+  # def test_redirect_set_content_type
+  #   get "http://example.org/assets/application.js"
+  #   assert_equal "application/javascript", last_response.headers['Content-Type']
+  # end
+
+  # def test_pass_unmached_assets
+  #   get "http://example.org/assets/unmatched.js"
+  #   assert last_response.ok?
+  # end
+
+  # def test_setting_prefix
+  #   build_app(:prefix => "/hidden_assets")
+  #   get "http://example.org/assets/application.js"
+  #   assert last_response.ok?
+
+  #   get "http://example.org/hidden_assets/application.js"
+  #   assert last_response.redirect?
+  # end
+
+  # def test_setting_asset_host
+  #   build_app(:asset_host => "http://test.cloudfront.net")
+
+  #   get "http://example.org/assets/application.js"
+  #   assert_equal "http://test.cloudfront.net/assets/application-1a2b3c4d5e.js",
+  #     last_response.headers['Location']
+  # end
+
+  # def test_setting_asset_host_without_protocol
+  #   build_app(:asset_host => "test.cloudfront.net")
+
+  #   get "http://example.org/assets/application.js"
+  #   assert_equal "http://test.cloudfront.net/assets/application-1a2b3c4d5e.js",
+  #     last_response.headers['Location']
+  # end
+
+  # def test_setting_asset_host_proc
+  #   build_app(
+  #     :asset_host => Proc.new do |request|
+  #       if request.path.end_with?("/application.js")
+  #         "http://test.cloudfront.net"
+  #       end
+  #     end
+  #   )
+
+  #   get "http://example.org/assets/application.js"
+  #   assert_equal "http://test.cloudfront.net/assets/application-1a2b3c4d5e.js",
+  #     last_response.headers['Location']
+
+  #   get "http://example.org/assets/another-application.js"
+  #   assert_equal "http://example.org/assets/another-application-1a2b3c4d5e.js",
+  #     last_response.headers['Location']
+  # end
+end
