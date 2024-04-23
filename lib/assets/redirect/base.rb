@@ -23,6 +23,7 @@ class Assets::Redirect::Base
 
   private
     def should_redirect?
+      log("should redirect: #{Assets::Redirect.enabled} && #{asset_not_found?} && #{file_exists?(redirect_path)}. redirect_path: #{redirect_path} request_path: #{@request.path}")
       Assets::Redirect.enabled && asset_not_found? && file_exists?(redirect_path)
     end
 
@@ -32,6 +33,7 @@ class Assets::Redirect::Base
 
     def file_exists?(path)
       full_path = File.join(@public_path, path)
+      log("file_exists full path: #{full_path}")
       File.exist?(full_path) && !File.directory?(full_path)
     end
 
