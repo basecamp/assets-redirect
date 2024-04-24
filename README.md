@@ -29,6 +29,11 @@ Install the gem and add to the application's Gemfile by executing:
 
 This middleware will be enabled by default if you set `config.assets.compile = false` and `config.assets.digest = true` in your configuration file.
 
+### Running inside Docker with Sprockets
+
+If you run the app in a Docker container and are using Sprockets is suggested to keep the Sprockets cache (`tmp/cache/assets`) in the container, this allows faster redirect
+lookups for `.js` and `.css` files.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
