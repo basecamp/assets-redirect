@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
     Useful to automate redirects from deleted assets when the old link can't be updated, e.g. emails.
   EOS
 
-  spec.homepage = "https://github.com/basecamp/assets_redirect"
+  spec.homepage = "https://github.com/basecamp/assets-redirect"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.7.8"
 
