@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+VERSION=$1
+
+printf "module Assets\n  module Redirect\n    VERSION = \"$VERSION\"\n  end\nend\n" > ./lib/assets/redirect/version.rb
+bundle
+git add Gemfile.lock lib/assets/redirect/version.rb
+git commit -m "Bump version for $VERSION"
+git push
+git tag v$VERSION
+git push --tags
+gem build assets-redirect.gemspec
+gem push "assets-redirect-$VERSION.gem" --host https://rubygems.org
+rm "assets-redirect-$VERSION.gem"
