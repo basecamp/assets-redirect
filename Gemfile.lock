@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    assets-redirect (0.1.0)
+    assets-redirect (0.1.1)
       rack
 
 GEM
