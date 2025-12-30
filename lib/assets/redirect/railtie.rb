@@ -1,14 +1,14 @@
 if defined?(Rails)
   class Assets::Redirect::Railtie < ::Rails::Railtie
     initializer "insert_assets_redirect_middleware" do |app|
-      if !app.config.assets.compile && app.config.assets.digest
+      if app.config.assets && !app.config.assets.compile && app.config.assets.digest
         middleware_class = \
           if defined?(Sprockets::Base)
             Assets::Redirect::Sprockets
           elsif defined?(Propshaft)
             Assets::Redirect::Propshaft
           else
-            raise "assets-redirect: Only Sprockets and Propshaft are supported."
+            raise "assets-redirect: Only Sprockets and Propshaft are supported for auto-install. See README for ViteRuby."
           end
 
         app.middleware.insert 0,

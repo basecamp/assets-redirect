@@ -17,7 +17,7 @@ This gem has been inspired from https://github.com/sikachu/sprockets-redirect, b
 ## Requirements
 
 - Application running on [Ruby on Rails](http://github.com/rails/rails) version >= 4.2.0.
-- [Sprockets](https://github.com/rails/sprockets) or [Propshaft](https://github.com/rails/propshaft) as assets pipeline.
+- [Sprockets](https://github.com/rails/sprockets), [Propshaft](https://github.com/rails/propshaft), or [ViteRuby](https://github.com/ElMassimo/vite_ruby) as assets pipeline.
 
 ## Installation
 
@@ -33,6 +33,23 @@ This middleware will be enabled by default if you set `config.assets.compile = f
 
 If you run the app in a Docker container and are using Sprockets is suggested to keep the Sprockets cache (`tmp/cache/assets`) in the container, this allows faster redirect
 lookups for `.js` and `.css` files.
+
+### ViteRuby
+
+For ViteRuby, the middleware needs to be added manually since ViteRuby doesn't use `config.assets`. Add this to an initializer (e.g. `config/initializers/assets_redirect.rb`):
+
+```ruby
+Rails.application.configure do
+  unless ViteRuby.run_proxy?
+    config.middleware.insert 0,
+      Assets::Redirect::ViteRuby,
+      -> { Rails.application.assets },
+      public_path: config.paths["public"].first,
+      assets_prefix: "/vite/assets",
+      logger: Rails.logger
+  end
+end
+```
 
 ## Development
 
