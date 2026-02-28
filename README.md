@@ -10,7 +10,7 @@ They will get redirected to the current version pointed by the manifest:
 
     http://example.org/assets/application-faa42cf2fd5db7e7290baa07109bc99b.png
 
-This gem is designed to run on your staging or production environment, where you already precompile all your assets, turn on your asset digest, and turn of asset compilation. This is useful if you're having a static page or email which refers to static assets in the asset pipeline, in this case the asset with the old digest can be lost after a deploymeny, and is convenient to automatically show the current version instead of a 404.
+This gem is designed to run on your staging or production environment, where you already precompile all your assets, turn on your asset digest, and turn off asset compilation. This is useful if you're having a static page or email which refers to static assets in the asset pipeline, in this case the asset with the old digest can be lost after a deployment, and it's convenient to automatically show the current version instead of a 404.
 
 This gem has been inspired from https://github.com/sikachu/sprockets-redirect, but with the difference that in this gem both digested/undigested links will automatically redirect to the latest digested version.
 
