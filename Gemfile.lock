@@ -25,7 +25,7 @@ GEM
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
     minitest (5.26.1)
-    mocha (2.2.0)
+    mocha (3.1.0)
       ruby2_keywords (>= 0.0.5)
     mutex_m (0.2.0)
     rack (3.0.16)
