@@ -25,6 +25,7 @@ class Assets::Redirect::PropshaftTest < ActiveSupport::TestCase
     get "http://example.org/assets/snowglobe-8f05909c25ad578ba8fbb27fb28da779.png"
     assert_equal "http://example.org/assets/snowglobe-#{SNOWGLOBE_DIGEST}.png",
       last_response.headers["Location"]
+    assert_equal "no-cache, max-age=0", last_response.headers["Cache-Control"]
 
     get "http://example.org/assets/snowglobe.png"
     assert_equal "http://example.org/assets/snowglobe-#{SNOWGLOBE_DIGEST}.png",
