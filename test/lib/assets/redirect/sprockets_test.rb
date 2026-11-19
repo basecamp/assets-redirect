@@ -22,7 +22,7 @@ class Assets::Redirect::SprocketsTest < ActiveSupport::TestCase
     assert_equal "http://example.org/assets/snowglobe-#{SNOWGLOBE_DIGEST}.png",
       last_response.headers["Location"]
     assert_equal "image/png", last_response.header["Content-Type"]
-    assert_equal "no-cache; max-age=0", last_response.headers["Cache-control"]
+    assert_equal "no-cache, max-age=0", last_response.headers["Cache-control"]
     assert_equal 302, last_response.status
     assert_match /Redirecting to.*example\.org/, last_response.body
 

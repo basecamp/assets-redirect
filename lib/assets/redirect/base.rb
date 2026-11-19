@@ -61,7 +61,7 @@ class Assets::Redirect::Base
 
       headers = { "Location"      => url.to_s,
                   "Content-Type"  => Rack::Mime.mime_type(File.extname(path_from_manifest)),
-                  "Cache-Control" => "no-cache; max-age=0" }
+                  "Cache-Control" => "no-cache, max-age=0" }
 
       log "assets-redirect: Redirecting to #{redirect_path}"
       [ 302, headers, [ redirect_message(url) ] ]
